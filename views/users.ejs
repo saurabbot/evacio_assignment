@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+<h1>All Ecovian Users</h1>
+<div class="container">
+    <% users.forEach((user) => {%>
+        <div class="card" id="card">
+            <div class="card-body">
+                <h5 class="card-title"><%=user.fullName%> joined <%=user.joined%></h5>
+                <h2><i class="fa-solid fa-user"></i><%=user.username%></h2>
+            </div>
+        </div>
+    <%})%>
+</div>
+<style>
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .card{
+        width: 300px;
+        margin-top: 8px;
+        border-radius: 30px;
+    }
+</style>
+<%- include('partials/footer') %>

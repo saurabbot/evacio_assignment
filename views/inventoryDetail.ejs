@@ -1,0 +1,180 @@
+<%- include('partials/header') %>
+<div class="container">
+        <h1><%=inventory.name%></h1>
+        <div class="allbags">
+            <div class="damage">
+                <h2>
+                    Damage Bags
+                </h2>
+                <% inventory.bags.forEach((bag) => {%>
+                    <%const bagid = bag._id;%>
+                <ol class="list-group list-group-numbered">
+                    <% if (bag.status === 'damage') {%>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                              <div class="fw-bold">Size: <%=bag.size%></div>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Change
+                              </button>
+                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Change bag status</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <form class="bagForm" action="/bag/<%=bagid%>/update/<%=inventory._id%>" method="POST">
+                                            <div class="mb-3">
+                                                <select class="form-select" id="status" name="status" aria-label="Default select example">
+                                                    <option selected>Select Status</option>
+                                                    <option value="damage">Damaged</option>
+                                                    <option value="repair">Repair</option>
+                                                    <option value="ready">Ready</option>
+                                                </select>
+                                                <input value="<%=bag._id%>" name="bagId">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                
+                                        </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <a class="btn btn-danger" href="/inventory/<%=inventory._id%>/bag/<%=bag._id%>/remove">removebag</a>
+                            </div>
+                            <span class="badge bg-primary rounded-pill"><%=bag.weight%></span>
+                          </li>
+                    <%}%>
+                </ol>
+                <%})%>
+    
+            </div>
+            <div class="repair">
+                <h2>
+                    Repair Bags
+                </h2>
+                <% inventory.bags.forEach((bag) => {%>
+                <ol class="list-group list-group-numbered">
+                    <% if (bag.status === 'repair') {%>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                              <div class="fw-bold">Size: <%=bag.size%></div>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Change
+                              </button>
+                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Change bag status</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="bagForm" action="/bag/<%=bag._id%>/update/<%=inventory._id%>" method="POST">
+                                            <div class="mb-3">
+                                                <select class="form-select" id="status" name="status" aria-label="Default select example">
+                                                    <option selected>Select Status</option>
+                                                    <option value="damage">Damaged</option>
+                                                    <option value="repair">Repair</option>
+                                                    <option value="ready">Ready</option>
+                                                </select>
+                                                <input value="<%=bag._id%>" name="bagId">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                
+                                        </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <a class="btn btn-danger" href="/inventory/<%=inventory._id%>/bag/<%=bag._id%>/remove">remove</a>
+                            </div>
+                            <span class="badge bg-primary rounded-pill"><%=bag.weight%></span>
+                          </li>
+                    <%}%>
+                </ol>
+                <%})%>
+            </div>
+            <div class="ready">
+                <h2>
+                    Ready Bags
+                </h2>
+                <% inventory.bags.forEach((bag) => {%>
+                <ol class="list-group">
+                    <% if (bag.status === 'ready') {%>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                              <div class="fw-bold">Size: <%=bag.size%></div>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Change
+                              </button>
+                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Change bag status</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="bagForm" action="/bag/<%=bag._id%>/update/<%=inventory._id%>" method="POST">
+                                            <div class="mb-3">
+                                                <select class="form-select" id="status" name="status" aria-label="Default select example">
+                                                    <option selected>Select Status</option>
+                                                    <option value="damage">Damaged</option>
+                                                    <option value="repair">Repair</option>
+                                                    <option value="ready">Ready</option>
+                                                </select>
+                                                <input value="<%=bag._id%>" name="bagId">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                
+                                        </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <a class="btn btn-danger" href="/inventory/<%=inventory._id%>/bag/<%=bag._id%>/remove">remove</a>
+                            </div>
+                            <span class="badge bg-primary rounded-pill"><%=bag.weight%></span>
+                        </li>
+                    <%}%>
+                </ol>
+                <%})%>
+    
+            </div>
+        </div>
+</div>
+<style>
+    .btn{
+        width: 60px;
+        border-radius: 30px;
+        font-size: 10px;
+    }
+    .list-group{
+        width: 300px;
+    }
+    .list-group-item{
+        padding: 3px;
+        margin: 1px;
+        height: 60px;
+
+    }
+    .allbags {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .damage {
+        width: 50%;
+    }
+    .repair {
+        width: 50%;
+    }
+    .ready {
+        width: 50%;
+    }
+</style>
+<%- include('partials/footer') %>

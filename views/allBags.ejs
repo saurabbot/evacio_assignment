@@ -1,0 +1,85 @@
+<%- include('partials/header') %>
+<div class="header">
+    <h3>
+        All Items Stored Here.
+    </h3>
+    <div class="input-group mb-3">
+        <form action="/bag/searchBag" method="POST">
+            <input type="text" class="form-control" placeholder="bag uuid" id="query" name="query">
+            <button class="btn btn-info" type="submit" >Search</button>
+        </form>
+        <a class="btn btn-danger" href="/bag/allbags" style="width: 60px;margin: 10px;border-radius: 20px;height: 30px;">Reset</a>
+
+    </div>
+</div>
+<div class="list">
+    <div class="list-group">
+        <% bags.forEach((bag) => {%>
+            <%const bgId = bag._id;%>
+        <span href="#" class="list-group-item list-group-item-action " aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1" style="background-color: yellow;border-radius: 30px;"><%=bag._id%></h5>
+              <small style="background-color: aquamarine;border-radius: 50px;">Weight: <%=bag.weight%>kgs</small>
+            </div>
+            <div class="details" style="display: flex; justify-content: space-evenly;">
+                <p  class="mb-1">Color of the flap: <div style="background-color: <%=bag.color%>;width: 40px;height: 30px;top: 10px;border-radius: 50%;"></div></p>
+                <small style="background-color: antiquewhite;border-radius: 20px;">Size:<%=bag.size%></small>
+                <small style="background-color: rgb(153, 250, 140);border-radius: 20px;">Status:<%=bag.status%></small>
+                <button style="border-radius: 60px;" 
+                class="btn btn-primary" 
+                type="button" data-bs-toggle="offcanvas" 
+                data-bs-target="#offcanvasRight" 
+                aria-controls="offcanvasRight">
+                Add to Inventory
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                      <h5 id="offcanvasRightLabel">Add to Inventory</h5>
+                      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <form class="bagForm" action="/bag/<%=bgId%>/pushbag" method="POST">
+                            <h5><%=bgId%></h5>
+                            <select class="form-select" aria-label="Default select example" name="inventId">
+                                <option selected>Choose inventory</option>
+                                <% inventories.forEach((inventory) => {%>
+                                <option value=<%=inventory._id%>><%=inventory.name%></option>
+                                <%})%>
+                              </select>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </span>
+        <%})%>
+    </div>
+
+</div>
+<style>
+    .header{
+        width: 400px;
+        padding: 30px;
+    }
+    .list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+        text-decoration: none;
+    }
+    .list-group{
+        border-radius: 20px;
+        width: 500px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(10, 234, 241, 0.966) 0px 3px 7px -3px;
+        background-color: aliceblue;
+    }
+    .list-group-item{
+        margin: 1.4px;
+        border-radius: 20px;
+    }
+</style>
+<%- include('partials/footer') %>

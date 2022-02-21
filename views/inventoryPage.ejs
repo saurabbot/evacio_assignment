@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+<div class="container">
+    <button style="border-radius: 60px;" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Add Inventory</button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Build Inventory</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form class="bagForm" action="/inventory/addInventory" method="POST">
+                <div class="mb-3">
+                    <label for="inventName">Inventory Name</label>
+                    <input type="text" class="form-control" name="name" >
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+    
+            </form>
+        </div>
+    </div>
+    <div class="row">
+            <% inventories.forEach((inventory) => {%>
+                <a href="/inventory/<%=inventory._id%>">
+                    <div class="card" id="card">
+                        <div class="card-body">
+                          <h5 class="card-title"><%=inventory.name%></h5>
+                          <h2><%=inventory.bags.length%> bags</h2>
+                        </div>
+                    </div>
+                </a>
+            <%})%>
+    </div>
+
+</div>
+<style>
+    .row{
+        grid-template-columns: 1fr 1fr;
+    }
+    .card {
+        margin: 20px;
+        border-radius: 50px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 15rem;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        padding: 10px;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+</style>
+<script>
+    var colors = ['#ff0000', '#00ff00', '#0000ff'];
+    var random_color = colors[Math.floor(Math.random() * colors.length)];
+    document.getElementById('card').style.backgroundColor = random_color;
+</script>
+<%- include('partials/footer') %>

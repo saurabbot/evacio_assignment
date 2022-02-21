@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+<%- include('partials/sidebar') %>
+<div class="container">
+    <form class="userForm" action="/login" method="POST" novalidate>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">SignIn</button>
+        <p>New Here?<a href="/register">Make account</a></p>
+    </form>
+</div>
+  <style>
+      body{
+          height: 100vh;
+      }
+      .container{
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+      }
+      .userForm{
+          margin-top: 40px;
+          width: 500px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+
+  </style>
+<%- include('partials/footer') %>
